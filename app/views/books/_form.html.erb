@@ -1,0 +1,43 @@
+<%=form_with model:book do |form| %>
+    <div>
+        <%= form.label :title%><br>
+        <%=form.text_field :title%><br>
+        <% book.errors.full_messages_for(:title).each do |message| %>
+        <div><%=message%></div>
+        <%end%>
+    </div>
+
+    <div>
+        <%= form.label :summary%><br>
+        <%=form.text_area :summary%><br>
+        <% book.errors.full_messages_for(:summary).each do |message| %>
+        <div><%=message%></div>
+        <%end%>
+
+    </div>
+    <div>  
+       <%= form.label "Published Date:"%>
+        <% if @book.pubdate.present? %>
+        <%= form.date_field :pubdate, value: @book.pubdate.strftime('%Y-%m-%d') %>
+        <% else %>
+        <%= form.date_field :pubdate %>
+        <% end %>
+        <br>
+        <% book.errors.full_messages_for(:pubdate).each do |message| %>
+        <div><%=message%></div>
+        <%end%>
+
+    </div>
+
+    <div>
+       <%= form.label :Author%>
+          <%= form.collection_select :author_id, Author.all,:id,:auname, include_blank: "Select an Author" %>
+          <% @book.errors.full_messages_for(:author_id).each do |message| %>
+          <div><%= message %></div>
+<% end %>
+    </div>
+
+    <div>
+        <%=form.submit%>
+    </div>
+<% end %>

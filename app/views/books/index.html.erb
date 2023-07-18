@@ -1,0 +1,18 @@
+<h1> Books Library</h1>
+ <%= link_to "Home", books_path %>
+
+<%= form_with url: "/books", method: :get do |form| %>
+  <%= form.label :search, "Search for:" %>
+  <%= form.text_field :search%>
+  <%= form.submit "Search" %>
+<% end %>
+
+<ul>
+    <%@books.each do |book|%>
+    <li>
+        <%= link_to book.title, book %>
+    </li>
+    <%end%>
+</ul>
+
+<%= link_to "New Book", new_book_path %>

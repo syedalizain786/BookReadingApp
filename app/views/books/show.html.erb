@@ -1,0 +1,22 @@
+<h1>Title: <%=@book.title%></h1>
+<h2>Summary:</h2>
+<p><%=@book.summary%></p>
+<h2>Author Name:</h2>
+<p><%=@book.author.auname%></p>
+
+<h4>Published Date:<%=@book.pubdate%></h4>
+
+<ul>
+    <li>
+        <%=link_to "Edit", edit_book_path(@book)%>
+    </li>
+       <li>
+        <%=link_to "Delete", book_path(@book),data:{
+            turbo_method: :delete,
+            turbo_confirm: "Are you sure?"
+        }%>
+    </li>
+    <li>
+        <%= link_to "All Books", books_path %>
+    </li>
+</ul>
