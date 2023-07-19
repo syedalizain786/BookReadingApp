@@ -1,15 +1,15 @@
 class BooksController < ApplicationController
   
-  before_action :authenticate_user!
  
   load_and_authorize_resource
 
 
+
   def index
   
-    @books=Book.all
+    @books=Book.accessible_by(current_ability)
     if params[:search].present? && params[:search] != ""
-    @books=Book.where("title LIKE ?","%"+params[:search]+"%")
+    @books=Book.where("title LIKE ?","%"+params[:search]+"%").accessible_by(current_ability)
     end
     
   end
@@ -59,7 +59,7 @@ class BooksController < ApplicationController
 
   private
   def book_params
-    params.require(:book).permit(:title, :summary, :pubdate, :author_id)
+    params.require(:book).permit(:title, :summary, :pubdate, :author_id,:user_id)
   end
 
 end
