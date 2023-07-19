@@ -1,8 +1,10 @@
 class BooksController < ApplicationController
-  def dashboard
   
-  end
-  
+  before_action :authenticate_user!
+ 
+  load_and_authorize_resource
+
+
   def index
   
     @books=Book.all
@@ -21,8 +23,10 @@ class BooksController < ApplicationController
     @book = Book.new 
   end
 
+  
   def create
     @book = Book.new(book_params)
+
     if @book.save
       redirect_to @book
     else
