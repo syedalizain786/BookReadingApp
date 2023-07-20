@@ -1,22 +1,33 @@
 class BooksController < ApplicationController
   
  
-  load_and_authorize_resource
+  #load_and_authorize_resource
 
 
+  def seehome
+    @books=Book.all
+    
+  end
 
   def index
   
-    @books=Book.accessible_by(current_ability)
+   #@books=Book.accessible_by(current_ability)
+    
+   @books = policy_scope(Book)
+
+    
     if params[:search].present? && params[:search] != ""
-    @books=Book.where("title LIKE ?","%"+params[:search]+"%").accessible_by(current_ability)
+    @books=policy_scope(Book).where("title LIKE ?","%"+params[:search]+"%")
     end
     
   end
    
 
   def show
-    @book=Book.find(params[:id])
+
+   @book=Book.find(params[:id])
+   authorize @book
+
   end
 
   def new
@@ -26,6 +37,8 @@ class BooksController < ApplicationController
   
   def create
     @book = Book.new(book_params)
+    @book.user = current_user # Assign the book to the current user
+    authorize @book
 
     if @book.save
       redirect_to @book
@@ -37,10 +50,13 @@ class BooksController < ApplicationController
 
   def edit
     @book=Book.find(params[:id])
+   authorize @book
+
   end
 
   def update
     @book=Book.find(params[:id])
+    authorize @book
 
     if @book.update(book_params)
       redirect_to @book
@@ -52,6 +68,8 @@ class BooksController < ApplicationController
 
   def destroy
     @book=Book.find(params[:id])
+   authorize @book
+
     @book.destroy
 
     redirect_to books_path,status: :see_other
