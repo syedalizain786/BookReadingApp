@@ -1,4 +1,5 @@
 class Book < ApplicationRecord
+    belongs_to :user, optional:true
     belongs_to :author, optional: true
     validates :title, presence: true, uniqueness: {scope: :title}
     validates :summary, presence: true, length: { minimum: 10 }

@@ -30,15 +30,14 @@ class Ability
     # https://github.com/CanCanCommunity/cancancan/blob/develop/docs/define_check_abilities.md
 
     #user ||= User.new #guest user (not loged in)
-    if user.admin?
-      can :manage, Book
-    end
+  #   if user.admin?
+  #     can :manage, Book
+  #   end
 
-    if user.persisted?
-      can :create, Book
-      can :manage, Book, user_id: user.id
-    end
+  #   if user.persisted?      
+  #     can :manage, Book, user_id: user.id
+  #   end
 
-  end
+   end
 
 end
