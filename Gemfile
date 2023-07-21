@@ -76,3 +76,7 @@ end
 gem "devise", "~> 4.9"
 
 gem "cancancan", "~> 3.5"
+
+gem "pundit", "~> 2.3"
+
+gem "pagy", "~> 6.0"
