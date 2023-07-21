@@ -1,7 +1,7 @@
 class BookPolicy < ApplicationPolicy
   def show?
-    # Users can only see their own books
-    user == record.user || user.admin?
+    # Users can only see their own bookss
+    record.user==user
   end
 
   def create?
@@ -11,20 +11,20 @@ class BookPolicy < ApplicationPolicy
 
   def update?
     # Users can only update their own books
-    user == record.user || user.admin?
+    record.user==user
+    
   end
 
   def destroy?
     # Users can only delete their own books
-    user == record.user || user.admin?
+    record.user==user
+    
   end    
   
   class Scope < Scope
-    if user.admin?
-      scope.all # Admins can see all books
-    else
+    def resolve
       scope.where(user:user) # Regular users can only see their own books
     end
-      end
+  end
       
 end

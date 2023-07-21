@@ -15,11 +15,6 @@ class ApplicationController < ActionController::Base
     
 
 
-  # Use the admin? method from the User model to check if the current user is an admin
-  def admin?
-    current_user&.admin? # Assuming 'admin?' is the method in the User model
-  end
-  helper_method :admin? # Make the helper method available in views
     
     # rescue_from CanCan::AccessDenied do |exception|
     #     redirect_to root_path, :alert => exception.message

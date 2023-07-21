@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  
+  
   def admin?
         id== 1
    end
