@@ -10,24 +10,22 @@ class BooksController < ApplicationController
   end
 
   def index
-  
-   #@books=Book.accessible_by(current_ability)
     
-   @books = policy_scope(Book)
+   #@books=Book.accessible_by(current_ability)    
+    @pagy, @books = pagy(policy_scope(Book))
 
     
-    if params[:search].present? && params[:search] != ""
-    @books=policy_scope(Book).where("title LIKE ?","%"+params[:search]+"%")
-    end
+    # if params[:search].present? && params[:search] != ""
+    # @books=policy_scope(Book).where("title LIKE ?","%"+params[:search]+"%")
+    # end
     
   end
    
 
-  def show
-
-   @book=Book.find(params[:id])
-   authorize @book
-
+ 
+  def show  
+    @book = @book.find(params[:id])
+    authorize @book
   end
 
   def new

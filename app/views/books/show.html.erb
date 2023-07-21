@@ -1,3 +1,6 @@
+<%
+=begin%>
+ <%= @book = @books.first%>
 <h1>Title: <%=@book.title%></h1>
 <h2>Summary:</h2>
 <p><%=@book.summary%></p>
@@ -19,4 +22,6 @@
     <li>
         <%= link_to "All Books", books_path %>
     </li>
-</ul>
+</ul> 
+<%
+=end%>
