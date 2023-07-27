@@ -80,3 +80,5 @@ gem "cancancan", "~> 3.5"
 gem "pundit", "~> 2.3"
 
 gem "pagy", "~> 6.0"
+
+gem "jquery-rails", "~> 4.6"
