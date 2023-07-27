@@ -21,10 +21,20 @@ class BooksController < ApplicationController
     
   end
    
+  def search
+  
+    query = params[:query]
+
+    @books = Book.joins(:author).where('authors.auname LIKE ?', "%#{query}%")
+    respond_to do |format|
+      format.json { render json: @books.map { |book| {id:book.id, title: book.title, author_name: book.author.auname } } }
+    end
+  end
+
 
  
   def show  
-    @book = @book.find(params[:id])
+    @book = Book.find(params[:id])
     authorize @book
   end
 
