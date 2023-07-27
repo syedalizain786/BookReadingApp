@@ -82,3 +82,10 @@ gem "pundit", "~> 2.3"
 gem "pagy", "~> 6.0"
 
 gem "jquery-rails", "~> 4.6"
+gem 'redis'
+gem 'sidekiq'
+
+
+group :development do
+  gem 'foreman'
+end
